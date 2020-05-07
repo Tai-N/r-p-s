@@ -1,11 +1,11 @@
-const cpuPick = () => {
+const cpuPicks = () => {
   const choices = ["rock", "paper", "scissors"];
   let randomIndex = Math.floor(Math.random() * 3);
 
   return choices[randomIndex];
 };
 
-const userPick = () => {
+const userPicks = () => {
   let userChoice = prompt("Enter your choice!");
 
   return userChoice.toLowerCase();
