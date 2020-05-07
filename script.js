@@ -12,8 +12,6 @@ const userPick = () => {
 };
 
 const playRound = (userChoice, cpuChoice) => {
-  debugger;
-
   let combinedChoices = userChoice + cpuChoice;
   let roundResult = "";
 
