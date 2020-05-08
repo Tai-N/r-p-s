@@ -6,9 +6,19 @@ const cpuPicks = () => {
 };
 
 const userPicks = () => {
-  let userChoice = prompt("Enter your choice!");
+  const userBtns = document.querySelector(".user-btns");
 
-  return userChoice.toLowerCase();
+  userBtns.addEventListener("click", (e) => {
+    debugger;
+    if (e.target.matches(".r-btn")) {
+      playRound("rock", cpuPicks());
+    } else if (e.target.textContent === "Paper") {
+      playRound("paper", cpuPicks());
+    } else if (e.target.textContent === "Scissors") {
+      playRound("scissors", cpuPicks());
+    } else {
+    }
+  });
 };
 
 const playRound = (userChoice, cpuChoice) => {
@@ -38,29 +48,30 @@ const playRound = (userChoice, cpuChoice) => {
       break;
   }
 
-  return roundResult;
+  scoresUpdate(roundResult);
 };
 
-const startGame = () => {
+const scoresUpdate = (roundResult) => {
+  let userScoreBox = document.getElementById("user-score-box");
+  let cpuScoreBox = document.getElementById("cpu-score-box");
+
   let userScore = 0;
   let cpuScore = 0;
 
-  for (let cnt = 0; cnt < 5; cnt++) {
-    let roundResult = playRound(userPick(), cpuPick());
-    if (roundResult === "You lose!") {
-      cpuScore++;
-    } else if (roundResult === "You win!") {
-      userScore++;
-    }
+  if (roundResult === "You lose!") {
+    cpuScore++;
+  } else if (roundResult === "You win!") {
+    userScore++;
   }
 
-  if (userScore > cpuScore) {
+  userScoreBox.textContent = userScore;
+  cpuScoreBox.textContent = cpuScoreBox;
+
+  if (userScore === 5) {
     console.log("You are the official winner!");
-  } else if (userScore < cpuScore) {
+  } else if (cpuScore === 5) {
     console.log("You are the offical loser!");
-  } else {
-    console.log("It's an official tie!");
   }
 };
 
-startGame();
+userPicks();

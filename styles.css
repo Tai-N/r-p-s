@@ -1,0 +1,17 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+}
+
+.score-board {
+  font-size: 2rem;
+}
+
+.user-btns {
+  margin-top: 1rem;
+}
