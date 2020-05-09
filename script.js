@@ -1,3 +1,15 @@
+let userScore = 0;
+let cpuScore = 0;
+let userScoreBox = document.getElementById("user-score-box");
+let cpuScoreBox = document.getElementById("cpu-score-box");
+
+const rockBtn = document.getElementById("r-btn");
+const paperBtn = document.getElementById("p-btn");
+const scissorsBtn = document.getElementById("s-btn");
+const rpsBtns = document.querySelectorAll(".btn");
+
+const gameMssg = document.getElementById("game-mssg");
+
 const cpuPicks = () => {
   const choices = ["rock", "paper", "scissors"];
   let randomIndex = Math.floor(Math.random() * 3);
@@ -5,19 +17,15 @@ const cpuPicks = () => {
   return choices[randomIndex];
 };
 
-const userPicks = () => {
-  const userBtns = document.querySelector(".user-btns");
-
-  userBtns.addEventListener("click", (e) => {
-    debugger;
-    if (e.target.matches(".r-btn")) {
-      playRound("rock", cpuPicks());
-    } else if (e.target.textContent === "Paper") {
-      playRound("paper", cpuPicks());
-    } else if (e.target.textContent === "Scissors") {
-      playRound("scissors", cpuPicks());
-    } else {
-    }
+const listenForUserPicks = () => {
+  rockBtn.addEventListener("click", () => {
+    playRound("rock", cpuPicks());
+  });
+  paperBtn.addEventListener("click", () => {
+    playRound("paper", cpuPicks());
+  });
+  scissorsBtn.addEventListener("click", () => {
+    playRound("scissors", cpuPicks());
   });
 };
 
@@ -29,35 +37,29 @@ const playRound = (userChoice, cpuChoice) => {
     case "rockrock":
     case "paperpaper":
     case "scissorsscissors":
-      console.log("It's a tie!");
       roundResult = "It's a tie!";
+      gameMssg.textContent = roundResult;
       break;
     case "rockpaper":
     case "paperscissors":
     case "scissorsrock":
-      console.log("You lose!");
       roundResult = "You lose!";
+      gameMssg.textContent = roundResult;
       break;
     case "rockscissors":
     case "paperrock":
     case "scissorspaper":
-      console.log("You win!");
       roundResult = "You win!";
+      gameMssg.textContent = roundResult;
       break;
     default:
       break;
   }
 
-  scoresUpdate(roundResult);
+  updateScores(roundResult);
 };
 
-const scoresUpdate = (roundResult) => {
-  let userScoreBox = document.getElementById("user-score-box");
-  let cpuScoreBox = document.getElementById("cpu-score-box");
-
-  let userScore = 0;
-  let cpuScore = 0;
-
+const updateScores = (roundResult) => {
   if (roundResult === "You lose!") {
     cpuScore++;
   } else if (roundResult === "You win!") {
@@ -65,13 +67,28 @@ const scoresUpdate = (roundResult) => {
   }
 
   userScoreBox.textContent = userScore;
-  cpuScoreBox.textContent = cpuScoreBox;
+  cpuScoreBox.textContent = cpuScore;
 
   if (userScore === 5) {
-    console.log("You are the official winner!");
+    gameMssg.textContent = "You are the official winner!";
+    disableBtns();
   } else if (cpuScore === 5) {
-    console.log("You are the offical loser!");
+    gameMssg.textContent = "You are the official loser!";
+    disableBtns();
   }
 };
 
-userPicks();
+const resetGame = () => {
+  userScore = 0;
+  cpuScore = 0;
+  userScoreBox.textContent = userScore;
+  cpuScoreBox.textContent = cpuScore;
+  gameMssg.textContent = "";
+  rpsBtns.disabled = false;
+};
+
+const disableBtns = () => {
+  rpsBtns.disabled = true;
+};
+
+listenForUserPicks();

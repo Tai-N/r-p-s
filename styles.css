@@ -15,3 +15,12 @@ body {
 .user-btns {
   margin-top: 1rem;
 }
+
+#game-mssg {
+  margin: 2rem auto;
+  height: 2rem;
+}
+
+#reset-btn {
+  margin-top: 4rem;
+}
