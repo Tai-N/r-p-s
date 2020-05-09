@@ -6,7 +6,6 @@ let cpuScoreBox = document.getElementById("cpu-score-box");
 const rockBtn = document.getElementById("r-btn");
 const paperBtn = document.getElementById("p-btn");
 const scissorsBtn = document.getElementById("s-btn");
-const rpsBtns = document.querySelectorAll(".btn");
 
 const gameMssg = document.getElementById("game-mssg");
 
@@ -71,8 +70,7 @@ const updateScores = (roundResult) => {
 
   if (userScore === 5) {
     gameMssg.textContent = "You are the official winner!";
-    disableBtns();
-  } else if (cpuScore === 5) {
+    disableBtns(); } else if (cpuScore === 5) {
     gameMssg.textContent = "You are the official loser!";
     disableBtns();
   }
@@ -84,11 +82,15 @@ const resetGame = () => {
   userScoreBox.textContent = userScore;
   cpuScoreBox.textContent = cpuScore;
   gameMssg.textContent = "";
-  rpsBtns.disabled = false;
+  rockBtn.disabled = false;
+  paperBtn.disabled = false;
+  scissorsBtn.disabled = false;
 };
 
 const disableBtns = () => {
-  rpsBtns.disabled = true;
+  rockBtn.disabled = true;
+  paperBtn.disabled = true;
+  scissorsBtn.disabled = true;
 };
 
 listenForUserPicks();
